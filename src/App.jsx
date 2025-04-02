@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Navigation from './components/Navigation/Navigation'
+import Logo from './components/Logo/Logo'
 import './App.css'
 
 class App extends Component {
@@ -8,7 +9,7 @@ class App extends Component {
       <>
         <div>
           <Navigation />
-          {/* <Logo /> */}
+          <Logo />
           {/* <ImageLinkForm /> */}
           {/* <FaceRecognition /> */}
         </div>
