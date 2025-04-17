@@ -5,6 +5,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import Rank from './components/Rank/Rank'
 import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 import ParticlesBg from 'particles-bg'
+import Signin from './components/Signin/Signin'
 import './App.css'
 
 const returnClarifyOptions = (imageUrl) => {
@@ -52,7 +53,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: null,
-      box: {}
+      box: {},
+      route: 'signin'
     }
   }
 
@@ -84,18 +86,27 @@ class App extends Component {
       .catch(e => console.log(e))
   }
 
+  onRouteChange = (route) => {
+    this.setState({route})
+  }
+
   render() {
     return (
       <>
         <div className='App'>
           <ParticlesBg type='cobweb' bg={true} />
-          <Navigation />
-          <Logo />
-          <Rank />
-          <ImageLinkForm
-            onInputChange={this.onInputChange}
-            onButtonSubmit={this.onButtonSubmit} />
-          <FaceRecognition box={this.state.box} imageUrl={ this.state.imageUrl } />
+          <Navigation onRouteChange={ this.onRouteChange }/>
+          { this.state.route === 'signin'
+            ? <Signin onRouteChange={ this.onRouteChange } />
+            : <>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit} />
+            <FaceRecognition box={this.state.box} imageUrl={ this.state.imageUrl } />
+            </>
+          }
         </div>
       </>
     )
